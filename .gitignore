@@ -9,3 +9,6 @@
 
 # binaries
 *.pdf
+
+# secrets
+credentials.tex

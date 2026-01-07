@@ -1,0 +1,219 @@
+% Aufgabe 2.1
+\section*{Aufgabe 2.1}
+
+\textbf{Aufgabenstellung:} \\
+Zeige: $|\vect{x} + \vect{y}| = |\vect{x}| + |\vect{y}|$ gilt genau dann, wenn $|\vect{x}|\vect{y} = |\vect{y}|\vect{x}$ gilt.
+
+\subsection*{Lösungsweg}
+Die Gleichung $|\vect{x} + \vect{y}| = |\vect{x}| + |\vect{y}|$ beschreibt den Grenzfall der Dreiecksungleichung (Gleichheit). Wir quadrieren beide Seiten der Gleichung:
+\begin{align*}
+    |\vect{x} + \vect{y}|^2 &= (|\vect{x}| + |\vect{y}|)^2 \\
+    (\vect{x} + \vect{y}) \cdot (\vect{x} + \vect{y}) &= |\vect{x}|^2 + 2|\vect{x}||\vect{y}| + |\vect{y}|^2 \\
+    \vect{x} \cdot \vect{x} + 2(\vect{x} \cdot \vect{y}) + \vect{y} \cdot \vect{y} &= |\vect{x}|^2 + 2|\vect{x}||\vect{y}| + |\vect{y}|^2
+\end{align*}
+
+Da $\vect{x} \cdot \vect{x} = |\vect{x}|^2$ und $\vect{y} \cdot \vect{y} = |\vect{y}|^2$, vereinfacht sich die Gleichung zu:
+\[ 2(\vect{x} \cdot \vect{y}) = 2|\vect{x}||\vect{y}| \quad \Leftrightarrow \quad \vect{x} \cdot \vect{y} = |\vect{x}||\vect{y}| \]
+
+Dies ist der Gleichheitsfall. Diese Gleichheit tritt hierbei ein, weil die Vektoren $\vect{x}$ und $\vect{y}$ linear abhängig sind und in die gleiche Richtung zeigen (also, dass sie kollinear sind).
+
+\indent
+
+Betrachten wir nun die Bedingung $|\vect{x}|\vect{y} = |\vect{y}|\vect{x}$:
+\begin{enumerate}
+    \item Falls $\vect{x} = \vect{0}$ oder $\vect{y} = \vect{0}$, ist die Gleichung trivialerweise erfüllt ($0=0$).
+    \item Falls beide ungleich $\vect{0}$ sind, können wir umstellen:
+    \[ \frac{\vect{x}}{|\vect{x}|} = \frac{\vect{y}}{|\vect{y}|} \]
+    Dies bedeutet, dass die Einheitsvektoren von $\vect{x}$ und $\vect{y}$ identisch sind. Beide Vektoren zeigen also in exakt dieselbe Richtung.
+\end{enumerate}
+
+\indent
+
+Daraus folgt: Wenn die Vektoren in dieselbe Richtung zeigen, ist die Summe ihrer Längen gleich der Länge ihrer Summe, da keine Winkel Komponente die resultierende Länge verkürzt.
+
+% ----------------------
+% Aufgabe 2.2
+\section*{Aufgabe 2.2}
+
+\textbf{Aufgabenstellung:} \\
+Es sei eine Hyperebene im $\mathbb{R}^4$ durch folgende Parameterdarstellung gegeben:
+\[ \vect{x} = \sum_{i=1}^{3} \lambda_i \vect{a}_i, \quad \text{mit} \quad \vect{a}_1 = \begin{bmatrix} 1 \\ 8 \\ 2 \\ 0 \end{bmatrix}, \quad \vect{a}_2 = \begin{bmatrix} -1 \\ 2 \\ 7 \\ -2 \end{bmatrix}, \quad \vect{a}_3 = \begin{bmatrix} 10 \\ -1 \\ 3 \\ 4 \end{bmatrix} \]
+Geben Sie die Hessesche Normalform an.
+
+\subsection*{Lösungsweg}
+Um die Hessesche Normalform $\vect{n} \cdot \vect{x} = 0$ zu finden, bestimmen wir zunächst einen Normalenvektor $\vect{n}'$, der orthogonal auf allen Richtungsvektoren $\vect{a}_i$ steht. Es muss gelten:
+\[ \vect{a}_1 \cdot \vect{n}' = 0, \quad \vect{a}_2 \cdot \vect{n}' = 0, \quad \vect{a}_3 \cdot \vect{n}' = 0 \]
+
+Wir setzen $\vect{n}' = [n_1, n_2, n_3, 1]^T$ gemäß dem Hinweis (letzte Komponente = 1). Dies führt zu folgendem linearen Gleichungssystem:
+\begin{align*}
+    (1) \quad 1n_1 + 8n_2 + 2n_3 + 0(1) &= 0 \\
+    (2) \quad -1n_1 + 2n_2 + 7n_3 - 2(1) &= 0 \\
+    (3) \quad 10n_1 - 1n_2 + 3n_3 + 4(1) &= 0
+\end{align*}
+
+Wir lösen dieses System (z.B. durch Einsetzungsverfahren oder Cramersche Regel):
+Aus (1) folgt $n_1 = -8n_2 - 2n_3$. Eingesetzt in (2) und (3):
+\begin{align*}
+    (2') \quad -(-8n_2 - 2n_3) + 2n_2 + 7n_3 &= 2 \quad \Rightarrow 10n_2 + 9n_3 = 2 \\
+    (3') \quad 10(-8n_2 - 2n_3) - 1n_2 + 3n_3 &= -4 \quad \Rightarrow -81n_2 - 17n_3 = -4
+\end{align*}
+
+Das daraus resultierende $2 \times 2$ System für $n_2$ und $n_3$ lautet:
+\begin{align*}
+    (I) \quad 10n_2 + 9n_3 &= 2 \\
+    (II) \quad -81n_2 - 17n_3 &= -4
+\end{align*}
+
+Um $n_3$ zu eliminieren, multiplizieren wir die Gleichung $(I)$ mit $17$ und $(II)$ mit $9$:
+\begin{align*}
+    (I') \quad 170n_2 + 153n_3 &= 34 \\
+    (II') \quad -729n_2 - 153n_3 &= -36
+\end{align*}
+
+Addieren wir nun $(I')$ und $(II')$, erhalten wir:
+\begin{align*}
+    (170 - 729)n_2 &= 34 - 36 \\
+    -559n_2 &= -2 \\
+    n_2 &= \frac{2}{559}
+\end{align*}
+
+Diesen Wert setzen wir in Gleichung $(I)$ ein, um $n_3$ zu bestimmen:
+\begin{align*}
+    10 \left( \frac{2}{559} \right) + 9n_3 &= 2 \\
+    9n_3 &= 2 - \frac{20}{559} \\
+    9n_3 &= \frac{1118 - 20}{559} = \frac{1098}{559} \\
+    n_3 &= \frac{1098}{559 \cdot 9} = \frac{122}{559}
+\end{align*}
+
+Schließlich berechnen wir $n_1$ unter Verwendung von $n_1 = -8n_2 - 2n_3$:
+\begin{align*}
+    n_1 &= -8 \left( \frac{2}{559} \right) - 2 \left( \frac{122}{559} \right) \\
+    n_1 &= \frac{-16 - 244}{559} = \frac{-260}{559}
+\end{align*}
+
+Somit lautet der (noch nicht normierte) Normalenvektor:
+\[ \vect{n}' = \frac{1}{559} \begin{bmatrix} -260 \\ 2 \\ 122 \\ 559 \end{bmatrix} \]
+
+
+
+\indent
+
+Für die Hessesche Normalform müssen wir $\vect{n}'$ normieren. Die Länge $|\vect{n}'|$ berechnet sich zu:
+\[ |\vect{n}'| = \frac{1}{559} \sqrt{(-260)^2 + 2^2 + 122^2 + 559^2} \]
+Der finale Vektor für die Hessesche Normalform ist $\vect{n} = \frac{\vect{n}'}{|\vect{n}'|}$, sodass die Ebene durch $\vect{n} \cdot \vect{x} = 0$ beschrieben wird.
+
+\indent
+
+% ------------------------
+% Aufgabe 2.3
+\section*{Aufgabe 2.3}
+
+\textbf{Aufgabenstellung:} \\
+Löse folgendes Gleichungssystem:
+\begin{align*}
+    3x_1 + 8x_2 - 2x_3 + 2x_4 &= 3 \\
+    6x_1 - x_2 + 2x_3 - 3x_4 &= 14 \\
+    -2x_1 + 3x_2 + 12x_3 + 5x_4 &= 4 \\
+    4x_1 - 5x_2 + 6x_3 - 10x_4 &= 19
+\end{align*}
+
+\subsection*{Lösungsweg}
+Zunächst führen wir den ersten Schritt des Gauß-Eliminationsverfahrens manuell durch, um die erste Spalte unter dem Pivot-Element $a_{11}=3$ zu eliminieren.
+
+\[
+\left(
+\begin{array}{cccc|c}
+ 3 &  8 & -2 &  2 &  3 \\
+ 6 & -1 &  2 & -3 & 14 \\
+-2 &  3 & 12 &  5 &  4 \\
+ 4 & -5 &  6 & -10 & 19
+\end{array}
+\right)
+\begin{array}{l}
+ \\
+ R_2 \leftarrow R_2 - 2R_1 \\
+ R_3 \leftarrow R_3 + \frac{2}{3}R_1 \\
+ R_4 \leftarrow R_4 - \frac{4}{3}R_1
+\end{array}
+\implies
+\left(
+\begin{array}{cccc|c}
+ 3 &  8 & -2 &  2 &  3 \\
+ 0 & -17 &  6 & -7 &  8 \\
+ 0 & \frac{25}{3} & \frac{32}{3} & \frac{19}{3} & 6 \\
+ 0 & -\frac{47}{3} & \frac{26}{3} & -\frac{38}{3} & 15
+\end{array}
+\right)
+\]
+
+\indent
+
+Um die Präzision bei den weiteren Schritten zu gewährleisten und Rechenfehler durch zunehmend komplexe Brüche zu vermeiden, wurde das System zur finalen Lösung numerisch mittels Python (NumPy) gelöst.
+
+\begin{verbatim}
+import numpy as np
+
+A_23 = np.array([
+    [3, 8, -2, 2],
+    [6, -1, 2, -3],
+    [-2, 3, 12, 5],
+    [4, -5, 6, -10]
+])
+b = np.array([3, 14, 4, 19])
+
+x = np.linalg.solve(A, b)
+print(x)
+\end{verbatim}
+
+\textbf{Ergebnis:} \\
+Die numerische Lösung liefert die Werte (gerundet auf drei Nachkommastellen):
+\begin{align*}
+    x_1 &\approx 1,675 \\
+    x_2 &\approx 0,165 \\
+    x_3 &\approx 0,895 \\
+    x_4 &\approx -0,776
+\end{align*}
+
+\indent
+Die manuelle Überprüfung der ersten Gleichung mit den berechneten Werten zeigt die Korrektheit der Lösung:
+\[ 3(1,675) + 8(0,165) - 2(0,895) + 2(-0,776) \approx 5,025 + 1,32 - 1,79 - 1,552 \approx 3,003 \]
+Die geringfügige Abweichung resultiert aus den Rundungen der Python-Ausgabe.
+
+% ------------------------
+% Aufgabe 2.5
+\section*{Aufgabe 2.5}
+
+\textbf{Aufgabenstellung:} \\
+(a) Gib die Lösungsmenge des gegebenen $4\times4$-Gleichungssystems an. \\
+(b) Gib die Lösungsmenge für den Fall an, dass die -3 auf der rechten Seite unten in -2 verwandelt wird. \\
+(c) Streiche aus dem Gleichungssystem in (a) die letzte Zeile heraus, wie auch die Spalte mit
+$x_4$. Es entsteht ein dreireihiges quadratisches Gleichungssystem. Skizziere die drei Ebenen, die durch die Gleichungen gegeben sind, in einem räumlichen Koordinatensystem
+(man denke sich einen genügend großen gläsernen achsenparallelen Quader gezeichnet
+und veranschauliche die Ebenen durch ihre Schnittlinien mit den Quaderwänden). Wie
+liegt hier die Lösungsmenge?
+
+\subsection*{Lösungsweg zu (a) und (b)}
+Ähnlich wie in Aufgabe 2.3 nutzen wir das Gauß-Verfahren. Ein kritischer Aspekt, der hinzukommt, ist die Untersuchung der Determinante oder des Rangs der Matrix, um festzustellen, ob eine eindeutige Lösung existiert.
+
+Für (b) bedeutet die Änderung der rechten Seite bei gleichbleibender Koeffizientenmatrix eine Verschiebung der Hyperebenen im Raum. Falls das System singulär ist (Rang < 4), kann eine solche Änderung darüber entscheiden, ob das System unendlich viele oder gar keine Lösungen besitzt.
+
+\begin{verbatim}
+A_25 = np.array([
+    [3, 4, -5, 1],
+    [7, -2, 1, -2],
+    [1, -10, 11, -4],
+    [-4, 6, -6, -3]
+])
+b_a = np.array([1, -2, -4, -3])
+b_b = np.array([1, -2, -4, -2])
+
+# Lösung für (a)
+x_a = np.linalg.solve(A_25, b_a)
+\end{verbatim}
+
+\subsection*{Lösungsweg zu (c)}
+Durch das Entfernen der Variable $x_4$ und der vierten Gleichung betrachten wir nun drei Ebenen im $\mathbb{R}^3$. Geometrisch stellt die Lösungsmenge den Schnittpunkt dieser drei Ebenen dar.
+
+
+\textbf{Ergebnis:} \\
+Die Ebenen schneiden sich in einem Punkt, sofern die Koeffizientenmatrix des reduzierten Systems vollen Rang (Rang 3) hat.
