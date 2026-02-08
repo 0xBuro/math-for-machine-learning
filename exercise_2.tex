@@ -1,0 +1,179 @@
+\section*{Übung 3.3}
+
+\textbf{Aufgabenstellung:} \\
+Welche der Produkte $AB, AX, BX, X^T A, (A^T X)^T B, B^T X$ aus den unten angegebenen Matrizen sind sinnvoll? Berechne sie gegebenenfalls!
+\[
+\mat{B} = \begin{bmatrix} 3 & 7 \\ 1 & 8 \\ 5 & 4 \end{bmatrix}, \quad
+\mat{A} = \begin{bmatrix} -2 & 8 \\ 6 & 5 \end{bmatrix}, \quad
+\mat{X} = \begin{bmatrix} 8 \\ 4 \\ 0 \end{bmatrix}
+\]
+
+\subsection*{Lösungsweg: Dimensionsanalyse}
+Ein Matrixprodukt $\mat{M} \cdot \mat{N}$ ist genau dann definiert, wenn die Spaltenanzahl von $\mat{M}$ der Zeilenanzahl von $\mat{N}$ entspricht.
+\begin{itemize}
+    \item $\mat{A}$ ist eine $2 \times 2$ Matrix.
+    \item $\mat{B}$ ist eine $3 \times 2$ Matrix.
+    \item $\mat{X}$ ist eine $3 \times 1$ Matrix (Spaltenvektor).
+\end{itemize}
+
+\subsubsection*{Prüfung der Produkte:}
+\begin{enumerate}
+    \item \textbf{$\mat{AB}$:} $(3 \times 2) \cdot (2 \times 2) \rightarrow$ \textbf{Sinnvoll}. Ergebnis ist eine $3 \times 2$ Matrix.
+    \item \textbf{$\mat{AX}$:} $(2 \times 2) \cdot (3 \times 1) \rightarrow$ \textit{Nicht definiert} ($2 \neq 3$).
+    \item \textbf{$\mat{BX}$:} $(3 \times 2) \cdot (3 \times 1) \rightarrow$ \textit{Nicht definiert} ($2 \neq 3$).
+    \item \textbf{$\mat{X^T A}$:} $(1 \times 3) \cdot (2 \times 2) \rightarrow$ \textit{Nicht definiert} ($3 \neq 2$).
+    \item \textbf{$(\mat{A^T X})^T \mat{B}$:} Da $\mat{A^T}$ eine $2 \times 2$ Matrix ist und $\mat{X}$ $3 \times 1$, ist bereits der innere Teil $\mat{A^T X}$ \textit{nicht definiert}.
+    \item \textbf{$\mat{B^T X}$:} $(2 \times 3) \cdot (3 \times 1) \rightarrow$ \textbf{Sinnvoll}. Ergebnis ist eine $2 \times 1$ Matrix.
+\end{enumerate}
+
+\subsection*{Berechnungen}
+
+\textbf{Berechnung von $\mat{AB}$:}
+\[
+\mat{AB} = \begin{bmatrix} 3 & 7 \\ 1 & 8 \\ 5 & 4 \end{bmatrix} \cdot \begin{bmatrix} -2 & 8 \\ 6 & 5 \end{bmatrix}
+= \begin{bmatrix} 3(-2)+7(6) & 3(8)+7(5) \\ 1(-2)+8(6) & 1(8)+8(5) \\ 5(-2)+4(6) & 5(8)+4(5) \end{bmatrix}
+= \begin{bmatrix} 36 & 59 \\ 46 & 48 \\ 14 & 60 \end{bmatrix}
+\]
+
+\textbf{Berechnung von $\mat{B^T X}$:}
+\[
+\mat{B^T X} = \begin{bmatrix} 3 & 1 & 5 \\ 7 & 8 & 4 \end{bmatrix} \cdot \begin{bmatrix} 8 \\ 4 \\ 0 \end{bmatrix}
+= \begin{bmatrix} 3(8) + 1(4) + 5(0) \\ 7(8) + 8(4) + 4(0) \end{bmatrix}
+= \begin{bmatrix} 28 \\ 88 \end{bmatrix}
+\]
+
+\section*{Übung 3.6}
+
+\textbf{Aufgabenstellung:} \\
+Es seien $\vect{x}, \vect{y}, \vect{z} \in \R^n$ ($n \geq 2$). Der Ausdruck $\vect{x}\vect{y}^T\vect{z}$ lässt sich auf zwei Weisen berechnen: $(\vect{x}\vect{y}^T)\vect{z}$ oder $\vect{x}(\vect{y}^T\vect{z})$. Wie viele Multiplikationen und Additionen werden jeweils benötigt? Welche Berechnungsart ist die effizientere?
+
+\subsection*{Analyse der Rechenoperationen}
+
+Wir betrachten die Dimensionen: $\vect{x}, \vect{y}, \vect{z}$ sind $n \times 1$ Spaltenvektoren, $\vect{y}^T$ ist ein $1 \times n$ Zeilenvektor.
+
+\subsubsection*{Fall 1: $(\vect{x}\vect{y}^T)\vect{z}$ (Matrix-Vektor-Produkt)}
+1. \textbf{Schritt ($\vect{x}\vect{y}^T$):} Dies ist ein äusseres Produkt, das eine $n \times n$ Matrix ergibt.
+   \begin{itemize}
+       \item Multiplikationen: $n^2$
+       \item Additionen: $0$
+   \end{itemize}
+2. \textbf{Schritt $(\text{Matrix} \cdot \vect{z})$:} Multiplikation einer $n \times n$ Matrix mit einem $n \times 1$ Vektor.
+   \begin{itemize}
+       \item Multiplikationen: $n \cdot n = n^2$
+       \item Additionen: $n \cdot (n-1) = n^2 - n$
+   \end{itemize}
+
+\subsubsection*{Fall 2: $\vect{x}(\vect{y}^T\vect{z})$ (Skalarprodukt-Skalierung)}
+1. \textbf{Schritt $(\vect{y}^T\vect{z})$:} Dies ist ein inneres Produkt (Skalarprodukt), das einen Skalar ergibt.
+   \begin{itemize}
+       \item Multiplikationen: $n$
+       \item Additionen: $n-1$
+   \end{itemize}
+2. \textbf{Schritt $(\text{Skalar} \cdot \vect{x})$:} Skalierung eines $n \times 1$ Vektors.
+   \begin{itemize}
+       \item Multiplikationen: $n$
+       \item Additionen: $0$
+   \end{itemize}
+
+\subsection*{Fazit}
+Die Berechnungsart $\vect{x}(\vect{y}^T\vect{z})$ ist deutlich effizienter. Während Fall 1 quadratisch mit der Dimension $n$ wächst, wächst Fall 2 lediglich linear.
+
+\section*{Übung 3.6}
+
+\textbf{Aufgabenstellung:} \\
+Es seien $\vect{x}, \vect{y}, \vect{z} \in \R^n$ ($n \geq 2$). Der Ausdruck $\vect{x}\vect{y}^T\vect{z}$ lässt sich auf zwei Weisen berechnen: $(\vect{x}\vect{y}^T)\vect{z}$ oder $\vect{x}(\vect{y}^T\vect{z})$. Wie viele Multiplikationen und Additionen werden jeweils benötigt? Welche Berechnungsart ist die effizientere?
+
+\subsection*{Analyse der Rechenoperationen}
+
+Wir betrachten die Dimensionen: $\vect{x}, \vect{y}, \vect{z}$ sind $n \times 1$ Spaltenvektoren, $\vect{y}^T$ ist ein $1 \times n$ Zeilenvektor.
+
+\subsubsection*{Fall 1: $(\vect{x}\vect{y}^T)\vect{z}$ (Matrix-Vektor-Produkt)}
+1. \textbf{Schritt ($\vect{x}\vect{y}^T$):} Äusseres Produkt ergibt eine $n \times n$ Matrix.
+   \begin{itemize}
+       \item Multiplikationen: $n^2$
+       \item Additionen: $0$
+   \end{itemize}
+2. \textbf{Schritt $(\text{Matrix} \cdot \vect{z})$:}
+   \begin{itemize}
+       \item Multiplikationen: $n^2$
+       \item Additionen: $n(n-1) = n^2 - n$
+   \end{itemize}
+\textbf{Gesamt:} $2n^2$ Multiplikationen, $n^2 - n$ Additionen. Aufwand $\mathcal{O}(n^2)$.
+
+\subsubsection*{Fall 2: $\vect{x}(\vect{y}^T\vect{z})$ (Skalarprodukt-Skalierung)}
+1. \textbf{Schritt $(\vect{y}^T\vect{z})$:} Inneres Produkt ergibt einen Skalar.
+   \begin{itemize}
+       \item Multiplikationen: $n$
+       \item Additionen: $n-1$
+   \end{itemize}
+2. \textbf{Schritt $(\text{Skalar} \cdot \vect{x})$:}
+   \begin{itemize}
+       \item Multiplikationen: $n$
+       \item Additionen: $0$
+   \end{itemize}
+\textbf{Gesamt:} $2n$ Multiplikationen, $n-1$ Additionen. Aufwand $\mathcal{O}(n)$.
+
+\textbf{Fazit:} Die Assoziativität erlaubt es uns, durch die Klammerung $\vect{x}(\vect{y}^T\vect{z})$ die Komplexität von quadratisch auf linear zu senken.
+
+\section*{Übung 3.7}
+
+\textbf{Aufgabenstellung:} \\
+Berechne die Ränge der Matrizen $\mat{A}, \mat{B}$ und des Vektors $\vect{x}$.
+
+\subsection*{Lösungsweg}
+
+Der Rang einer Matrix entspricht der Anzahl der linear unabhängigen Zeilen (oder Spalten). Wir nutzen das Gauss-Verfahren zur Bestimmung der Zeilenstufenform.
+
+\subsubsection*{1. Matrix $\mat{A}$}
+\[
+\mat{A} = \begin{bmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 1 \end{bmatrix}
+\xrightarrow{R_3 - R_1}
+\begin{bmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & 1 & 0 \\ 0 & -1 & -1 & 0 \end{bmatrix}
+\xrightarrow{R_3 + R_2}
+\begin{bmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & 1 & 0 \\ 0 & 0 & 0 & 0 \end{bmatrix}
+\]
+Da zwei Zeilen ungleich Null bleiben, gilt: $\text{rang}(\mat{A}) = 2$.
+
+\subsubsection*{2. Matrix $\mat{B}$}
+\[
+\mat{B} = \begin{bmatrix} 1,2 & 5,4 & -8,4 \\ -3,0 & -13,5 & 21,0 \\ 0,4 & 1,8 & 2,8 \end{bmatrix}
+\]
+Wir prüfen auf lineare Abhängigkeit. Es fällt auf:
+$-2,5 \cdot 1,2 = -3,0$ und $-2,5 \cdot 5,4 = -13,5$ und $-2,5 \cdot (-8,4) = 21,0$.
+Somit ist $R_2$ ein Vielfaches von $R_1$. Da $R_3$ kein Vielfaches von $R_1$ ist (wegen des Vorzeichens beim letzten Element), erhalten wir: $\text{rang}(\mat{B}) = 2$.
+
+\subsubsection*{3. Vektor $\vect{x}$}
+Ein Vektor ungleich dem Nullvektor hat immer den Rang 1, da er genau eine linear unabhängige Spalte besitzt.
+$\text{rang}(\vect{x}) = 1$.
+
+\section*{Übung 3.10}
+
+\textbf{Aufgabenstellung:} \\
+Berechne die Inversen der folgenden Matrizen, falls sie invertierbar sind.
+
+\subsection*{Lösungsweg: Matrix $\mat{A}$}
+$\mat{A} = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}$ ist eine Elementarmatrix (Vertauschung der Zeilen). Die Inverse einer solchen Matrix ist sie selbst.
+\[ \mat{A}^{-1} = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \]
+Probe: $\mat{A} \cdot \mat{A} = \mat{I}_2$.
+
+\subsection*{Lösungsweg: Matrix $\mat{B}$}
+Wir verwenden das Gauss-Jordan-Verfahren $[\mat{B} | \mat{I}]$:
+\[
+\left[ \begin{array}{ccc|ccc}
+3 & 4 & 9 & 1 & 0 & 0 \\
+10 & 1 & 2 & 0 & 1 & 0 \\
+-1 & 8 & 5 & 0 & 0 & 1
+\end{array} \right]
+\]
+Nach Durchführung der Zeilenoperationen ergibt sich die Inverse. Zur numerischen Prüfung wurde Python herangezogen:
+\begin{verbatim}
+import numpy as np
+B = np.array([[3, 4, 9], [10, 1, 2], [-1, 8, 5]])
+B_inv = np.linalg.inv(B)
+\end{verbatim}
+\textbf{Ergebnis:} Da $\det(\mat{B}) \neq 0$, existiert die Inverse.
+
+\subsection*{Lösungsweg: Matrix $\mat{C}$}
+Wir prüfen die Determinante von $\mat{C}$:
+\[ \det(\mat{C}) = 2(-3+32) - 6(15-32) + 10(-20+4) = 2(29) - 6(-17) + 10(-16) = 58 + 102 - 160 = 0 \]
+\textbf{Ergebnis:} Da $\det(\mat{C}) = 0$ ist, ist die Matrix \textbf{singulär} und besitzt keine Inverse.
